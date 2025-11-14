@@ -1,0 +1,214 @@
+.home-container {
+  padding-top: 76px; /* Height of the fixed navbar */
+}
+
+/* Hero Section */
+.hero-section {
+  height: calc(100vh - 76px);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('https://source.unsplash.com/1600x900/?restaurant,food') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero-content {
+  padding: 20px;
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease 0.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 15px 40px;
+  background-color: #ff6b6b;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  animation: fadeInUp 1s ease 0.4s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.cta-button:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Features Section */
+.features-section {
+  padding: 100px 20px;
+  background-color: #fff;
+}
+
+.feature-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card i {
+  font-size: 2.5rem;
+  color: #ff6b6b;
+  margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  color: #2d3436;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: #636e72;
+  line-height: 1.6;
+}
+
+/* Special Section */
+.special-section {
+  padding: 100px 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+              url('https://source.unsplash.com/1600x900/?dining') center/cover fixed;
+  color: white;
+  text-align: center;
+}
+
+.special-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.special-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.special-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.special-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.special-button:hover {
+  background-color: white;
+  color: #2d3436;
+}
+
+/* Location Section */
+.location-section {
+  padding: 100px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.location-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.location-content h2 {
+  font-size: 2.5rem;
+  color: #2d3436;
+  margin-bottom: 1rem;
+}
+
+.location-content p {
+  color: #636e72;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.location-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 12px 30px;
+  background-color: #ff6b6b;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.location-button:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .feature-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .special-content h2,
+  .location-content h2 {
+    font-size: 2rem;
+  }
+}

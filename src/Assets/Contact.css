@@ -1,0 +1,79 @@
+/* main wrapper */
+.contact-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 28px;
+  background: #0f172a;
+  color: #f1f5f9;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.4s ease;
+}
+
+/* heading */
+.contact-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #38bdf8, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* form layout */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* input + textarea shared style */
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 14px;
+  border: 2px solid #1e293b;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* focus glow animation */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+  outline: none;
+}
+
+/* submit button */
+.contact-form button {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+/* hover effect */
+.contact-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.45);
+}
+
+/* subtle fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
