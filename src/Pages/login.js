@@ -14,6 +14,12 @@ function Login() {
     setLoading(true);
     setError('');
 
+    if (!email || !password) {
+      setError('Please fill in all fields.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/Login', {
         method: 'POST',
@@ -21,23 +27,37 @@ function Login() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
+          email: email.trim(),
           password: password,
         }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Invalid server response.');
+      }
 
       if (response.ok) {
         localStorage.setItem('user', JSON.stringify(data.user));
         alert(`Welcome back, ${data.user.fname}!`);
         navigate('/home');
       } else {
-        setError(data.error || 'Login failed. Please try again.');
+        if (response.status === 401) {
+          setError('Invalid email or password.');
+        } else if (response.status >= 500) {
+          setError('Server error. Please try again later.');
+        } else {
+          setError(data.error || 'Login failed. Please try again.');
+        }
       }
     } catch (error) {
-      console.error('Login error:', error);
-      setError('Network error. Please check your connection and try again.');
+      if (error.message === 'Failed to fetch') {
+        setError('Network error. Please check your connection.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

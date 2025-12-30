@@ -27,14 +27,27 @@ function Signup() {
     setLoading(true);
     setError('');
 
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.password || !formData.confirmPassword) {
+      setError('Please fill in all fields.');
+      setLoading(false);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match!');
+      setError('Passwords do not match.');
       setLoading(false);
       return;
     }
 
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long!');
+      setError('Password must be at least 6 characters long.');
       setLoading(false);
       return;
     }
@@ -46,23 +59,37 @@ function Signup() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: formData.email,
+          email: formData.email.trim(),
           password: formData.password,
-          fname: `${formData.firstName} ${formData.lastName}`
+          fname: `${formData.firstName.trim()} ${formData.lastName.trim()}`
         }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Invalid server response.');
+      }
 
       if (response.ok) {
         alert('Signup successful! Please login.');
         navigate('/');
       } else {
-        setError(data.error || 'Signup failed. Please try again.');
+        if (response.status === 409) {
+          setError('Email already exists. Please use a different email.');
+        } else if (response.status >= 500) {
+          setError('Server error. Please try again later.');
+        } else {
+          setError(data.error || 'Signup failed. Please try again.');
+        }
       }
     } catch (error) {
-      console.error('Signup error:', error);
-      setError('Network error. Please check your connection and try again.');
+      if (error.message === 'Failed to fetch') {
+        setError('Network error. Please check your connection.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
