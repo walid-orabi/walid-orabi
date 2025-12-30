@@ -18,7 +18,7 @@ function About() {
           <p>Over the years, we've grown from a small family restaurant into a beloved culinary destination, while maintaining our commitment to quality, creativity, and warm hospitality.</p>
         </div>
         <div className="story-image">
-          <img src="download.jpg" alt="Our restaurant" className="rounded shadow" />
+          <img src={process.env.PUBLIC_URL + "/download.jpg"} alt="Our restaurant" className="rounded shadow" />
         </div>
       </div>
 
@@ -70,7 +70,7 @@ function About() {
         <div className="team-grid">
           <div className="team-member">
             <div className="member-image">
-              <img src="download (1).jpg" alt="Executive Chef" className="rounded" />
+              <img src={process.env.PUBLIC_URL + "/download (1).jpg"} alt="Executive Chef" className="rounded" />
             </div>
             <div className="member-info">
               <h3>Robert Williams</h3>
@@ -79,7 +79,7 @@ function About() {
           </div>
           <div className="team-member">
             <div className="member-image">
-              <img src="download (2).jpg" alt="Pastry Chef" className="rounded" />
+              <img src={process.env.PUBLIC_URL + "/download (2).jpg"} alt="Pastry Chef" className="rounded" />
             </div>
             <div className="member-info">
               <h3>Sarah Chen</h3>
@@ -88,7 +88,7 @@ function About() {
           </div>
           <div className="team-member">
             <div className="member-image">
-              <img src="download (3).jpg" alt="Restaurant Manager" className="rounded" />
+              <img src={process.env.PUBLIC_URL + "/download (3).jpg"} alt="Restaurant Manager" className="rounded" />
             </div>
             <div className="member-info">
               <h3>Michael Brown</h3>
