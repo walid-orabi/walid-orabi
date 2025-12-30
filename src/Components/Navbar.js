@@ -9,7 +9,7 @@ const Navbar = () => {
    
       <div className="logo">R-W</div>
       <div className="links">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/menu">Menu</Link>
         <Link to="/contact">Contact</Link>

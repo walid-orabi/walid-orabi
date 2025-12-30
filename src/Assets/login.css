@@ -1,0 +1,226 @@
+.login-container {
+  padding-top: 76px; /* Height of the fixed navbar */
+}
+
+/* Hero Section */
+.login-hero {
+  min-height: calc(100vh - 76px);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+              url('https://source.unsplash.com/1600x900/?restaurant,dining') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.login-form-container {
+  max-width: 500px;
+  width: 100%;
+}
+
+.login-form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.login-form h1 {
+  font-size: 2.5rem;
+  color: #2d3436;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #636e72;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2d3436;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.login-button:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.login-links {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.forgot-link {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.forgot-link:hover {
+  color: #ff5252;
+}
+
+.register-link {
+  color: #636e72;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #ff5252;
+}
+
+/* Features Section */
+.login-features {
+  padding: 100px 20px;
+  background-color: #f8f9fa;
+}
+
+.features-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login-features h2 {
+  font-size: 2.5rem;
+  color: #2d3436;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.feature-item {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.feature-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item i {
+  font-size: 2.5rem;
+  color: #ff6b6b;
+  margin-bottom: 1.5rem;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  color: #2d3436;
+  margin-bottom: 1rem;
+}
+
+.feature-item p {
+  color: #636e72;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-hero {
+    padding: 20px;
+  }
+
+  .login-form {
+    padding: 30px 20px;
+  }
+
+  .login-form h1 {
+    font-size: 2rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .login-features {
+    padding: 60px 20px;
+  }
+
+  .login-features h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 25px 15px;
+  }
+
+  .login-form h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-group input {
+    padding: 10px 12px;
+  }
+
+  .login-button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
