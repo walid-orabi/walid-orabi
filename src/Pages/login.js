@@ -29,10 +29,9 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        // Store user data in localStorage or context
         localStorage.setItem('user', JSON.stringify(data.user));
         alert(`Welcome back, ${data.user.fname}!`);
-        navigate('/home'); // Redirect to home page after successful login
+        navigate('/home');
       } else {
         setError(data.error || 'Login failed. Please try again.');
       }

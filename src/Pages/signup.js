@@ -19,7 +19,7 @@ function Signup() {
       ...formData,
       [e.target.name]: e.target.value
     });
-    setError(''); // Clear error when user starts typing
+    setError('');
   };
 
   const handleSubmit = async (e) => {
@@ -27,7 +27,6 @@ function Signup() {
     setLoading(true);
     setError('');
 
-    // Client-side validation
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match!');
       setLoading(false);
