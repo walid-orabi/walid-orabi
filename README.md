@@ -1,23 +1,117 @@
-# Getting Started with Create React App
+# R-W Restaurant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern restaurant website built with React frontend and Node.js/Express backend with MySQL authentication.
+
+## Project Structure
+
+```
+walid-orabi/
+├── backend/          # Express.js server with MySQL
+│   ├── server.js
+│   ├── package.json
+│   └── README.md
+├── src/             # React frontend
+│   ├── Pages/
+│   ├── Components/
+│   └── Assets/
+├── public/
+└── package.json
+```
+
+## Setup Instructions
+
+### Prerequisites
+- Node.js (v14 or higher)
+- MySQL (XAMPP or standalone MySQL server)
+
+### Database Setup
+1. Start your MySQL server
+2. Create a database named `liu`
+3. Create the `users` table:
+
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  fname VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Backend Setup
+1. Navigate to backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the backend server:
+   ```bash
+   npm start
+   ```
+   Server runs on `http://localhost:5000`
+
+### Frontend Setup
+1. In the root directory, install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the React development server:
+   ```bash
+   npm start
+   ```
+   App runs on `http://localhost:3000`
+
+## Features
+
+- **Authentication**: User signup and login with MySQL database
+- **Responsive Design**: Mobile-friendly restaurant website
+- **Modern UI**: Clean, professional design with smooth animations
+- **Menu System**: Interactive menu with cart functionality
+- **Contact Integration**: Contact form and location information
+
+## API Endpoints
+
+- `POST /Signup` - User registration
+- `POST /Login` - User authentication
+
+## Technologies Used
+
+### Frontend
+- React 18
+- React Router DOM
+- CSS3 with modern layouts
+- Font Awesome icons
+
+### Backend
+- Node.js
+- Express.js
+- MySQL2
+- CORS
 
 ## Available Scripts
 
-In the project directory, you can run:
+### Frontend
+- `npm start` - Runs the React app in development mode
+- `npm run build` - Builds the app for production
+- `npm test` - Launches the test runner
 
-### `npm start`
+### Backend
+- `npm start` - Runs the Express server
+- `npm run dev` - Runs with nodemon for development
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Deployment
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Build the React app: `npm run build`
+2. Deploy the `build` folder to your web server
+3. Ensure the backend is deployed and accessible
+4. Update API endpoints in the frontend if needed
 
 ### `npm run build`
 

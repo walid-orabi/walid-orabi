@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import Home from "./Pages/Home";
@@ -13,21 +13,19 @@ import Cart from "./Pages/Card";
 function App() {
   return (
     <CardProvider>
-      <Router>
-        <Navbar />
-        <div style={{ minHeight: "80vh" }}>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </div>
-        <Footer />
-      </Router>
+      <Navbar />
+      <div style={{ minHeight: "80vh" }}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </div>
+      <Footer />
     </CardProvider>
   );
 }

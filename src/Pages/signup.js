@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Assets/signup.css';
 
 function Signup() {
@@ -10,22 +10,63 @@ function Signup() {
     password: '',
     confirmPassword: ''
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError(''); // Clear error when user starts typing
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
+    setLoading(true);
+    setError('');
+
+    // Client-side validation
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!');
+      setError('Passwords do not match!');
+      setLoading(false);
       return;
     }
-    console.log('Signup attempt:', formData);
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long!');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/Signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          fname: `${formData.firstName} ${formData.lastName}`
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Signup successful! Please login.');
+        navigate('/');
+      } else {
+        setError(data.error || 'Signup failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      setError('Network error. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,6 +79,8 @@ function Signup() {
             <p className="signup-subtitle">Create your account to start your culinary journey</p>
 
             <form onSubmit={handleSubmit}>
+              {error && <div className="error-message">{error}</div>}
+
               <div className="name-fields">
                 <div className="form-group">
                   <label htmlFor="firstName">First Name</label>
@@ -87,7 +130,7 @@ function Signup() {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  placeholder="Create a password"
+                  placeholder="Create a password (min 6 characters)"
                   minLength="6"
                 />
               </div>
@@ -106,7 +149,9 @@ function Signup() {
                 />
               </div>
 
-              <button type="submit" className="signup-button">Create Account</button>
+              <button type="submit" className="signup-button" disabled={loading}>
+                {loading ? 'Creating Account...' : 'Create Account'}
+              </button>
             </form>
 
             <div className="signup-links">

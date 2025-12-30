@@ -1,15 +1,47 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Assets/login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt:', { email, password });
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:5000/Login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Store user data in localStorage or context
+        localStorage.setItem('user', JSON.stringify(data.user));
+        alert(`Welcome back, ${data.user.fname}!`);
+        navigate('/home'); // Redirect to home page after successful login
+      } else {
+        setError(data.error || 'Login failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Network error. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -22,6 +54,8 @@ function Login() {
             <p className="login-subtitle">Sign in to your R-W Restaurant account</p>
 
             <form onSubmit={handleSubmit}>
+              {error && <div className="error-message">{error}</div>}
+
               <div className="form-group">
                 <label htmlFor="email">Email Address</label>
                 <input
@@ -46,7 +80,9 @@ function Login() {
                 />
               </div>
 
-              <button type="submit" className="login-button">Sign In</button>
+              <button type="submit" className="login-button" disabled={loading}>
+                {loading ? 'Signing In...' : 'Sign In'}
+              </button>
             </form>
 
             <div className="login-links">
