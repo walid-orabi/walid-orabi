@@ -53,7 +53,7 @@ function About() {
               <p>Using only the finest ingredients to create exceptional dishes</p>
             </div>
             <div className="value-card">
-              <i className="fas fa-users"></i>
+              <i className="fas fa-userDB"></i>
               <h3>Community</h3>
               <p>Building relationships with our guests and local suppliers</p>
             </div>
