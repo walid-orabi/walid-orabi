@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/walid-orabi/static/css/main.7423af06.css",
-    "main.js": "/walid-orabi/static/js/main.504877c9.js",
+    "main.js": "/walid-orabi/static/js/main.e3074fc5.js",
     "static/js/453.fd2f0c4a.chunk.js": "/walid-orabi/static/js/453.fd2f0c4a.chunk.js",
     "index.html": "/walid-orabi/index.html",
     "main.7423af06.css.map": "/walid-orabi/static/css/main.7423af06.css.map",
-    "main.504877c9.js.map": "/walid-orabi/static/js/main.504877c9.js.map",
+    "main.e3074fc5.js.map": "/walid-orabi/static/js/main.e3074fc5.js.map",
     "453.fd2f0c4a.chunk.js.map": "/walid-orabi/static/js/453.fd2f0c4a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7423af06.css",
-    "static/js/main.504877c9.js"
+    "static/js/main.e3074fc5.js"
   ]
 }
