@@ -9,6 +9,9 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // ✅ Set this in .env: REACT_APP_API_URL=https://web2-backend-vr5h.onrender.com
+  const API = process.env.REACT_APP_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -20,44 +23,43 @@ function Login() {
       return;
     }
 
+    if (!API) {
+      setError('Missing REACT_APP_API_URL. Add it to your .env and restart the app.');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await fetch('http://localhost:5000/Login', {
+      // 🔁 If your backend route is /api/login, change this to `${API}/api/login`
+      const res = await fetch(`${API}/login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: email.trim(),
-          password: password,
-        }),
+          password
+        })
       });
 
-      let data;
-      try {
-        data = await response.json();
-      } catch {
-        throw new Error('Invalid server response.');
+      // Try to parse JSON even on errors
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setError(data.message || 'Login failed. Please check your credentials.');
+        return;
       }
 
-      if (response.ok) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-        alert(`Welcome back, ${data.user.fname}!`);
-        navigate('/home');
-      } else {
-        if (response.status === 401) {
-          setError('Invalid email or password.');
-        } else if (response.status >= 500) {
-          setError('Server error. Please try again later.');
-        } else {
-          setError(data.error || 'Login failed. Please try again.');
-        }
-      }
-    } catch (error) {
-      if (error.message === 'Failed to fetch') {
-        setError('Network error. Please check your connection.');
-      } else {
-        setError('An unexpected error occurred. Please try again.');
-      }
+      // Accept a few common response shapes:
+      // { user: {...}, token?: "..." } OR { ...userFields, token?: "..." }
+      const user = data.user ?? data;
+      const token = data.token ?? user.token;
+
+      localStorage.setItem('user', JSON.stringify(user));
+      if (token) localStorage.setItem('token', token);
+
+      alert(`Welcome back, ${user.fname || user.firstName || 'User'}!`);
+      navigate('/home');
+    } catch (err) {
+      setError('Server error. Please try again later.');
     } finally {
       setLoading(false);
     }

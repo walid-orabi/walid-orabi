@@ -14,6 +14,9 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // ✅ Set this in .env: REACT_APP_API_URL=https://web2-backend-vr5h.onrender.com
+  const API = process.env.REACT_APP_API_URL;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -27,7 +30,13 @@ function Signup() {
     setLoading(true);
     setError('');
 
-    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.password || !formData.confirmPassword) {
+    if (
+      !formData.firstName.trim() ||
+      !formData.lastName.trim() ||
+      !formData.email.trim() ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
       setError('Please fill in all fields.');
       setLoading(false);
       return;
@@ -52,44 +61,36 @@ function Signup() {
       return;
     }
 
+    if (!API) {
+      setError('Missing REACT_APP_API_URL. Add it to your .env and restart the app.');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await fetch('http://localhost:5000/Signup', {
+      // 🔁 If your backend route is /api/signup, change this to `${API}/api/signup`
+      const res = await fetch(`${API}/signup`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
           email: formData.email.trim(),
-          password: formData.password,
-          fname: `${formData.firstName.trim()} ${formData.lastName.trim()}`
-        }),
+          password: formData.password
+        })
       });
 
-      let data;
-      try {
-        data = await response.json();
-      } catch {
-        throw new Error('Invalid server response.');
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setError(data.message || 'Signup failed. Please try again.');
+        return;
       }
 
-      if (response.ok) {
-        alert('Signup successful! Please login.');
-        navigate('/');
-      } else {
-        if (response.status === 409) {
-          setError('Email already exists. Please use a different email.');
-        } else if (response.status >= 500) {
-          setError('Server error. Please try again later.');
-        } else {
-          setError(data.error || 'Signup failed. Please try again.');
-        }
-      }
-    } catch (error) {
-      if (error.message === 'Failed to fetch') {
-        setError('Network error. Please check your connection.');
-      } else {
-        setError('An unexpected error occurred. Please try again.');
-      }
+      alert('Signup successful! Please login.');
+      navigate('/');
+    } catch (err) {
+      setError('Server error. Please try again later.');
     } finally {
       setLoading(false);
     }
