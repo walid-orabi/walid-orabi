@@ -68,8 +68,8 @@ function Signup() {
     }
 
     try {
-      // 🔁 If your backend route is /api/signup, change this to `${API}/api/signup`
-      const res = await fetch(`${API}/signup`, {
+      // ✅ FIX: endpoint changed from /signup to /api/auth/signup
+      const res = await fetch(`${API}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
