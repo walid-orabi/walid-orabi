@@ -9,7 +9,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Set this in .env: REACT_APP_API_URL=https://web2-backend-vr5h.onrender.com
+  
   const API = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
@@ -30,7 +30,7 @@ function Login() {
     }
 
     try {
-      // Use the correct backend endpoint from the integration guide
+      
       const res = await fetch(`${API}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,7 +40,7 @@ function Login() {
         })
       });
 
-      // Parse JSON response
+      
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
@@ -48,7 +48,7 @@ function Login() {
         return;
       }
 
-      // Response: { message, user, token }
+      
       const user = data.user;
       const token = data.token;
 

@@ -14,7 +14,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Set this in .env: REACT_APP_API_URL=https://web2-backend-vr5h.onrender.com
+  
   const API = process.env.REACT_APP_API_URL;
 
   const handleChange = (e) => {
@@ -68,7 +68,7 @@ function Signup() {
     }
 
     try {
-      // Use the correct payload as per backend guide
+      
       const res = await fetch(`${API}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -97,7 +97,7 @@ function Signup() {
 
   return (
     <div className="signup-container">
-      {/* Hero Section */}
+      
       <section className="signup-hero">
         <div className="signup-form-container">
           <div className="signup-form">
@@ -189,7 +189,7 @@ function Signup() {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      
       <section className="signup-benefits">
         <div className="benefits-container">
           <h2>Why Join Us?</h2>
