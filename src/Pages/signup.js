@@ -68,13 +68,12 @@ function Signup() {
     }
 
     try {
-      // ✅ FIX: endpoint changed from /signup to /api/auth/signup
+      // Use the correct payload as per backend guide
       const res = await fetch(`${API}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName: formData.firstName.trim(),
-          lastName: formData.lastName.trim(),
+          fname: formData.firstName.trim(),
           email: formData.email.trim(),
           password: formData.password
         })
@@ -83,7 +82,7 @@ function Signup() {
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        setError(data.message || 'Signup failed. Please try again.');
+        setError(data.error || data.message || 'Signup failed. Please try again.');
         return;
       }
 

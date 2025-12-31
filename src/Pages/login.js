@@ -30,8 +30,8 @@ function Login() {
     }
 
     try {
-      // 🔁 If your backend route is /api/login, change this to `${API}/api/login`
-      const res = await fetch(`${API}/login`, {
+      // Use the correct backend endpoint from the integration guide
+      const res = await fetch(`${API}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -40,23 +40,22 @@ function Login() {
         })
       });
 
-      // Try to parse JSON even on errors
+      // Parse JSON response
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        setError(data.message || 'Login failed. Please check your credentials.');
+        setError(data.error || data.message || 'Login failed. Please check your credentials.');
         return;
       }
 
-      // Accept a few common response shapes:
-      // { user: {...}, token?: "..." } OR { ...userFields, token?: "..." }
-      const user = data.user ?? data;
-      const token = data.token ?? user.token;
+      // Response: { message, user, token }
+      const user = data.user;
+      const token = data.token;
 
-      localStorage.setItem('user', JSON.stringify(user));
+      if (user) localStorage.setItem('user', JSON.stringify(user));
       if (token) localStorage.setItem('token', token);
 
-      alert(`Welcome back, ${user.fname || user.firstName || 'User'}!`);
+      alert(`Welcome back, ${user?.fname || user?.firstName || 'User'}!`);
       navigate('/home');
     } catch (err) {
       setError('Server error. Please try again later.');
